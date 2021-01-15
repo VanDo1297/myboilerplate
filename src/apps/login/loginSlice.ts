@@ -8,7 +8,7 @@ type CounterState = {
     loading: boolean
 }
 
-const initialState: CounterState = {
+const initialState1: CounterState = {
     email: '',
     error:'',
     loading: false
@@ -16,7 +16,7 @@ const initialState: CounterState = {
 
 export const authSlice = createSlice({
     name: 'auth',
-    initialState,
+    initialState: initialState1,
     reducers: {
         login: (state, action) => {
             console.log(action);
@@ -32,5 +32,6 @@ export const authSlice = createSlice({
 export const { login, logout } = authSlice.actions
 
 export const selectAuth = (state: RootState) => state.auth
+// export const selectAuth = (state: RootState) => state.auth
 
-export default authSlice.reducer
+export const authReducer =  authSlice.reducer

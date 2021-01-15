@@ -1,7 +1,22 @@
 {
-    "presets": ["@babel/preset-env", "@babel/preset-react"],
+    "presets": [
+      "@babel/preset-env","@babel/preset-react",
+      "@babel/preset-typescript"
+    ],
     "plugins": [
       "@babel/plugin-syntax-dynamic-import",
-      "@babel/plugin-proposal-class-properties"
-    ]
+      "@babel/plugin-proposal-class-properties",
+    ],
+    "env": {
+      "production": {
+        "plugins": ["@babel/plugin-transform-modules-commonjs"]
+      },
+      "test": {
+        "presets": [
+          "@babel/preset-env",
+          "@babel/preset-react"
+        ],
+        "plugins": ["@babel/plugin-transform-modules-commonjs", "dynamic-import-node",]
+      }  
+    }
   }

@@ -1,0 +1,12 @@
+{
+    "collectCoverage":true,
+    "coverageThreshold":{
+        "global":{
+            "branches": 95,
+            "function":100,
+            "lines":100
+        }
+    },
+    "coverageReportes":["lcov"],
+    "coverageDirector":"./output/code-coverage/"
+}
