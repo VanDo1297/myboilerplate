@@ -1,43 +1,42 @@
-import React, { ReactElement } from 'react';
-import ReactDOM from 'react-dom';
-import { render,RenderResult, fireEvent } from '@testing-library/react';
+import React from 'react';
 import LoginPage from './login';
-import {Provider} from 'react-redux';
-import {store} from '../../index';
-import renderer from 'react-test-renderer';
+import { render , fireEvent} from '@testing-library/react';
+import {CounterState, selectAuth} from './loginSlice';
+import { Provider, useSelector } from 'react-redux'
+import configureStore from 'redux-mock-store';
+import * as reactRedux from 'react-redux';
+
 describe('<LoginPage />', () => {
-    let container: HTMLDivElement;
-
-    it('should render snapshot', () => {
-        // const inputs = container.querySelectorAll('input');
-        // expect(inputs).toHaveLength(1);
-        renderer.create(<LoginPage/>).toJSON();
+    const useSelectorMock = jest.spyOn(reactRedux, 'useSelector')
+    const initialState = {
+        email:'docs2gtvt@gmail.com'
+    } as CounterState;
+    const mockStore = configureStore();
+    beforeEach(() => {
+        useSelectorMock.mockClear()
+    })
+    it('should render button', () => {
+        const store = mockStore(initialState)
+        useSelectorMock.mockReturnValue({
+            email:'asdasd'
+        })
+        const wrapper = render(<Provider store={store}><LoginPage /></Provider>)
+        expect(wrapper).toMatchSnapshot();
     });
-});
-  
-// describe('behavior', () => {
-//     const setup = props => {
-//         const component = render(<Pagination />);
-//         component.rerender(<Pagination {...props} />);
-//         return component;
-//     };
-//     it('change input', () => {
-//         const { baseElement, getByTestId } = setup({
-//             pagination: {
-//             itemsPerPage: 20,
-//             totalNumberOfResults: 19,
-//             currentPageIndex: 2,
-//             },
-//             numberItem: 50,
-//         });
-//         const container = getByTestId('page-input');
-//         fireEvent.change(container, { target: { value: '2' } });
-//         expect(baseElement).toMatchSnapshot();
-//     });
-  
-//     it('keydown with keycode = 13', () => {
-      
-//     });
 
-// });
+    it('test render with input value is dotesing',()=>{
+        const store = mockStore(initialState)
+        useSelectorMock.mockReturnValue({
+            email:'asdasd'
+        })
+        const wrapper = render(<Provider store={store}><LoginPage /></Provider>)
+        const {baseElement} = wrapper
+        const inputs = baseElement.querySelector('input') as Element;
+        fireEvent.change(inputs, {
+            target: { value: 'dotesing' },
+        });
+        expect(wrapper).toMatchSnapshot();
+    })
+});
+
   

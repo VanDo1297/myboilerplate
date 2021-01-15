@@ -3,13 +3,14 @@ import React, { ReactElement, useState } from 'react';
 import {useDispatch, useSelector } from 'react-redux';
 import {selectAuth, login} from './loginSlice';
 
+
 export interface IInputForm{
     email:string,
 }
 
 function Login():ReactElement{
-    // const dispatch = useDispatch();
-    // const { email } = useSelector(selectAuth);
+    const dispatch = useDispatch();
+    const { email } = useSelector(selectAuth);
 
     const [inputValue, setInputValue]= useState({} as IInputForm);
 
@@ -20,7 +21,7 @@ function Login():ReactElement{
     }   
 
     const handleSubmit =()=>{
-        // dispatch(login({email: inputValue.email}))
+        dispatch(login({email: inputValue.email}))
     }
 
     return (
@@ -33,7 +34,7 @@ function Login():ReactElement{
 
             <div className="login__result">
                 <p className="">This is email : </p>
-                <p>{inputValue.email}</p>
+                <p>{email}</p>
             </div>
         </div>
     )

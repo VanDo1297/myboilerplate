@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../reducer';
 
 // Types
-type CounterState = {
+export type CounterState = {
     email: string,
     error:string,
     loading: boolean
