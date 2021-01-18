@@ -19,17 +19,13 @@ export const authSlice = createSlice({
     initialState: initialState1,
     reducers: {
         login: (state, action) => {
-            console.log(action);
             state.email = action.payload.email
-        },
-        logout: (state, action) => {
-            state.email= ''
         },
     },
 })
 
 // Slice action creators
-export const { login, logout } = authSlice.actions
+export const { login } = authSlice.actions
 
 export const selectAuth = (state: RootState) => state.auth
 // export const selectAuth = (state: RootState) => state.auth
